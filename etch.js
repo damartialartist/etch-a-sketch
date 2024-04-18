@@ -4,11 +4,14 @@ let sizePx = 700;
 const drawContainer = document.querySelector(".draw-container");
 drawContainer.setAttribute("style",`width:${sizePx}px; height:${sizePx}px`);
 
-for (let i = 0; i < 16; i++) {
+function createBoard(sizePx, nDim = 16) {
+    drawContainer.innerHTML = "";
+for (let i = 0; i < nDim; i++) {
+    drawContainer.setAttribute("style", `width:${sizePx}px; height:${sizePx}px;`)
     etchRow[i] = document.createElement("div");
     etchRow[i].setAttribute("class", `row`);
-    let height = sizePx/16;
-    for (let y = 0; y < 16; y++) {
+    let height = sizePx/nDim;
+    for (let y = 0; y < nDim; y++) {
         etchCol[y] = document.createElement("div");
         etchCol[y].setAttribute("class", `col`);
         etchCol[y].setAttribute("id", `r${i}c${y}`);
@@ -17,7 +20,10 @@ for (let i = 0; i < 16; i++) {
         console.log(y);
     }
     drawContainer.appendChild(etchRow[i]);
+  }
 }
+
+createBoard(500);
 
 drawContainer.addEventListener('mouseover', (event) => {
     let target = event.target;
@@ -26,3 +32,12 @@ drawContainer.addEventListener('mouseover', (event) => {
     currBox.style.backgroundColor = "black";
 });
 
+const btn = document.querySelector(".header button");
+btn.addEventListener("click", () => {
+    let dim = prompt("Enter square size (n)", "");
+
+    while (isNaN(dim) || (dim > 100)) {
+        dim = prompt("Please enter a number less than 100:", "");
+    }
+    createBoard(sizePx, dim);
+})
