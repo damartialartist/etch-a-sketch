@@ -2,9 +2,7 @@ let etchCol = [];
 let etchRow = [];
 let sizePx = 500;
 let isRandom = false;
-let randR;
-let randB;
-let randG;
+
 const drawContainer = document.querySelector(".draw-container");
 drawContainer.setAttribute("style",`width:${sizePx}px; height:${sizePx}px`);
 
@@ -32,10 +30,8 @@ drawContainer.addEventListener('mouseover', (event) => {
     let target = event.target;
     let currBox = document.getElementById(target.id);
     if (isRandom) {
-        randR = Math.random() * 255;
-        randG = Math.random() * 255;
-        randB = Math.random() * 255;
-        currBox.style.backgroundColor = `rgb(${randR}, ${randG}, ${randB})`;        
+        let randC = () => {return (Math.random() * 255);} ;
+        currBox.style.backgroundColor = `rgb(${randC()}, ${randC()}, ${randC()})`;        
     } else {
     currBox.style.backgroundColor = "black";
     }
