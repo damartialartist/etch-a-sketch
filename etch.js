@@ -1,6 +1,10 @@
 let etchCol = [];
 let etchRow = [];
-let sizePx = 700;
+let sizePx = 500;
+let isRandom = false;
+let randR;
+let randB;
+let randG;
 const drawContainer = document.querySelector(".draw-container");
 drawContainer.setAttribute("style",`width:${sizePx}px; height:${sizePx}px`);
 
@@ -17,19 +21,24 @@ for (let i = 0; i < nDim; i++) {
         etchCol[y].setAttribute("id", `r${i}c${y}`);
         etchCol[y].setAttribute("style", `width: 20px; height:${height}px; border-color=black;`)
         etchRow[i].appendChild(etchCol[y]);
-        console.log(y);
     }
     drawContainer.appendChild(etchRow[i]);
   }
 }
 
-createBoard(500);
+createBoard(sizePx);
 
 drawContainer.addEventListener('mouseover', (event) => {
     let target = event.target;
-    console.log(target.id);
     let currBox = document.getElementById(target.id);
+    if (isRandom) {
+        randR = Math.random() * 255;
+        randG = Math.random() * 255;
+        randB = Math.random() * 255;
+        currBox.style.backgroundColor = `rgb(${randR}, ${randG}, ${randB})`;        
+    } else {
     currBox.style.backgroundColor = "black";
+    }
 });
 
 let dim;
@@ -47,4 +56,17 @@ resizeBtn.addEventListener("click", () => {
 const eraseBtn = document.querySelector(".header button.era");
 eraseBtn.addEventListener("click", () => {
     createBoard(sizePx, dim);
+});
+
+const colorBtn = document.querySelector(".header button.colors")
+colorBtn.addEventListener("click", () => {
+    if (isRandom) {
+        colorBtn.style.backgroundColor = "black";
+        colorBtn.style.color = "white";
+        isRandom = false;
+    } else {
+        colorBtn.style.backgroundColor = "white";
+        colorBtn.style.color = "black";
+        isRandom = true;
+    }
 });
