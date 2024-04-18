@@ -32,12 +32,19 @@ drawContainer.addEventListener('mouseover', (event) => {
     currBox.style.backgroundColor = "black";
 });
 
-const btn = document.querySelector(".header button");
-btn.addEventListener("click", () => {
-    let dim = prompt("Enter square size (n)", "");
+let dim;
+
+const resizeBtn = document.querySelector(".header button.dim");
+resizeBtn.addEventListener("click", () => {
+    dim = prompt("Enter square size (n)", "");
 
     while (isNaN(dim) || (dim > 100)) {
         dim = prompt("Please enter a number less than 100:", "");
     }
     createBoard(sizePx, dim);
-})
+});
+
+const eraseBtn = document.querySelector(".header button.era");
+eraseBtn.addEventListener("click", () => {
+    createBoard(sizePx, dim);
+});
