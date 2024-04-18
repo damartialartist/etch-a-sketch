@@ -1,6 +1,6 @@
 let etchCol = [];
 let etchRow = [];
-let sizePx = 500;
+let sizePx = 700;
 let isRandom = false;
 
 const drawContainer = document.querySelector(".draw-container");
